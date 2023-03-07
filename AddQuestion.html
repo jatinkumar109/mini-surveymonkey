@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Question Creation</title>
+    <style>
+        table, th, td {
+            border: 0.5px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Survey Monkey Question Input Form</h1>
+<form action="#" action="@{/addQuestion}" object="${question}" method="post">
+    <p>Input Question: <input type="text"/></p>
+    <ul id="radioClicked">
+        <li each="radioValue: ${allValues}">
+            <input type="radio"
+                   field="*{radioButtonSelectedValue}"
+                   tvalue="${radioValue}" />
+        </li>
+    </ul>
+    <div id="multiple-choice" object="${multipleChoice}">
+        <p>Input Answer 1: <input type="text" /></p>
+        <p>Input Answer 2: <input type="text" /></p>
+        <p>Input Answer 3: <input type="text" /></p>
+        <p>Input Answer 4: <input type="text" /></p>
+    </div>
+    <div id="number-range" object="${numberRange}">
+        <p>Input Minimum Number Range: <input type="number" /></p>
+        <p>Input Maximum Number Range: <input type="number" /></p>
+    </div>
+    <p id="submit" ><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+<form action="">
+    <p><a href="/">To return to the HomePage click here</a></p>
+    <a href="@{/Surveys(name=${user.userName})}"> To return to the Survey List click here </a> <br/>
+</form>
+</body>
+
+</html>
