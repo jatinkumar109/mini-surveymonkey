@@ -83,5 +83,14 @@ public class Survey {
     public void close() {
         this.open = false;
     }
+
+
+    /**
+     * This function is used to add a new question to the list of questions in a
+     * @param questionAdded: the new Question object to be added the Survey
+     */
+    public void addQuestion(Question questionAdded){
+        this.questions.add(questionAdded);
+    }
 }
 
