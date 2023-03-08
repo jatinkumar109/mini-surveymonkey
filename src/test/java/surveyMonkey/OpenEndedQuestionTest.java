@@ -24,7 +24,7 @@ public class OpenEndedQuestionTest {
      */
     @Test
     public void testAddAnswer() {
-        boolean response = openQuestion.setAnswer("6ft (big man)");
+        boolean response = openQuestion.setAnswers("6ft (big man)");
         assertEquals(response, true);
     }
 
