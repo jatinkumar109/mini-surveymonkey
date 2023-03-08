@@ -15,10 +15,12 @@ public class Question {
     private Integer id;
     private final String question;
     private final QuestionType questionType;
-    private ArrayList options;
+    @ElementCollection(targetClass=String.class)
+    private ArrayList<String> options;
     private int lowerBound;
     private int upperBound;
-    private ArrayList answer;
+    @ElementCollection(targetClass=String.class)
+    private ArrayList<String> answer;
 
 
     /**
@@ -93,6 +95,6 @@ public class Question {
     /**
      * Allows the surveyor to get the answer of the questions
      */
-    public List<String> getAnswers() { return answer; }
+    public ArrayList<String> getAnswers() { return answer; }
 
 }
