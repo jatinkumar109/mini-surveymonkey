@@ -23,22 +23,37 @@ public abstract class Question {
         this.question = question;
     }
 
-
+    /**
+     * Getter for the ID
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
 
+    /**
+     * Setter for ID
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
 
+    /**
+     * Getter for all question types
+     * @return
+     */
     public String getQuestion() {
         return question;
     }
 
 
+    /**
+     * Setter for Questions
+     * @param question
+     */
     public void setQuestion(String question) {
         this.question = question;
     }
