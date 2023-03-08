@@ -38,7 +38,7 @@ public class SurveyController {
             return response;
         }
         return response;
-    }*/
+    }=
 
     /**
      * Getter for an attempted survey.
