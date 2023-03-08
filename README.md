@@ -3,7 +3,7 @@
 ## 👥 Authors 
 Yahya Khan, Mehedi Mostofa, Jatin Kumar, Kshitij Sawhney, Peter Tanyous
 
-## Goal: The Mini-SurveyMonkey project consists of various entities. A Surveyor can initiate a survey by creating a list of questions.
+## 🥅 Goal: The Mini-SurveyMonkey project consists of various entities. A Surveyor can initiate a survey by creating a list of questions.
 The questions can fall into three categories: open-ended (text), numerical (within a specified range), or multiple-choice.
 Users are presented with a survey form generated based on the type of questions in the survey, which they can fill out. 
 The Surveyor has the authority to close the survey at any time, preventing new users from participating. 
