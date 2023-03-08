@@ -1,7 +1,7 @@
 package surveyMonkey;
 
 import java.util.ArrayList;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * This class handles the Multiple Choice type of Questions

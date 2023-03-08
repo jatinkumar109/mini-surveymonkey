@@ -1,5 +1,5 @@
 package surveyMonkey;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class OpenEndedQuestion extends Question {
     private ArrayList<String> answer = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
-    private static final QuestionType questionType = QuestionType.MULTIPLE_CHOICE;
+    private static final QuestionType questionType = QuestionType.OPEN_ENDED;
 
     public OpenEndedQuestion(String question) {
         super(question,questionType);
