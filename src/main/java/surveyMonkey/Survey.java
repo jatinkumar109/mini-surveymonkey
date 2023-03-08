@@ -56,6 +56,13 @@ public class Survey {
     }
 
     /**
+     * Setter for Survey ID
+     */
+    public void setId(int id){
+        this.id = id;
+    }
+
+    /**
      * Getter for the survey ID.
      */
     public Integer getId() {
