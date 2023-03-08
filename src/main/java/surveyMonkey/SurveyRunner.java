@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Bean;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class handles and controls the operations of a survey.
+ */
+
 @SpringBootApplication
 public class SurveyRunner {
 
@@ -19,6 +23,11 @@ public class SurveyRunner {
         SpringApplication.run(SurveyRunner.class, args);
     }
 
+    /**
+     * Saves and fetches customer from a survey
+     * @param repository
+     * @return
+     */
     @Bean
     public CommandLineRunner demo(SurveyRepository repository) {
         return (args) -> {

@@ -2,6 +2,9 @@ package surveyMonkey;
 
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class handles and controls the survey operations.
+ */
 @RestController
 public class SurveyController {
 
@@ -12,6 +15,10 @@ public class SurveyController {
 
     }
 
+    /**
+     * This method starts a survey and saves it in a repository.
+     * @return
+     */
     @PostMapping("/CreateSurvey")
     public Survey createSurvey(){ //Need to account for the request bodies data being sent, need to have discussion of how this will look
         Survey survey = new Survey();
@@ -33,7 +40,10 @@ public class SurveyController {
         return response;
     }*/
 
-
+    /**
+     * Getter for an attempted survey.
+     * @return
+     */
     @GetMapping("/Survey")
     public Survey getSurvey(){
         //Integer surveyId = Integer.parseInt(id);
