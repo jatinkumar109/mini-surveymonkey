@@ -55,12 +55,6 @@ public class Survey {
         return this.name;
     }
 
-    /**
-     * Setter for Survey ID
-     */
-    public void setId(int id){
-        this.id = id;
-    }
 
     /**
      * Getter for the survey ID.
@@ -98,6 +92,10 @@ public class Survey {
      */
     public void addQuestion(Question questionAdded){
         this.questions.add(questionAdded);
+    }
+
+    public boolean isOpen() {
+        return this.open;
     }
 }
 
