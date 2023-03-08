@@ -1,7 +1,6 @@
 package surveyMonkey;
 import jakarta.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class handles the Open Ended type of Questions
@@ -20,10 +19,18 @@ public class OpenEndedQuestion extends Question {
     }
 
     /**
-     * Allows the surveyor to set the answer of the numerical range question
+     * Allows the surveyor to set the answer of the open-ended question
      */
-    public boolean setAnswer(String answer){
+    public boolean setAnswers(String answer){
        return this.answer.add(answer);
+    }
+
+    /**
+     * Allows the surveyor to get the answer of the open-ended question
+     */
+    @Override
+    public ArrayList<String> getAnswers(){
+        return answer;
     }
 
 }

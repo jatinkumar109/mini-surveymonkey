@@ -1,7 +1,6 @@
 package surveyMonkey;
 import jakarta.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -14,7 +13,7 @@ public class NumericalRangeQuestion extends Question {
     @Enumerated(EnumType.ORDINAL)
     private static final QuestionType questionType = QuestionType.NUMERICAL_RANGE;
     @ElementCollection(targetClass=String.class)
-    private List<String> answers= new ArrayList<>();
+    private ArrayList<String> answers= new ArrayList<>();
 
     public NumericalRangeQuestion(String question, int lowerBound, int upperBound) {
         super(question,questionType,lowerBound,upperBound);
@@ -22,8 +21,16 @@ public class NumericalRangeQuestion extends Question {
     /**
      * Allows the surveyor to set the answer of the numerical range question
      */
-    public boolean setAnswers(Float answers) {
-        return this.answers.add(answers.toString());
+    public boolean setAnswers(Float answer) {
+        return this.answers.add(answer.toString());
+    }
+
+    /**
+     * Allows the surveyor to get the answer of the numerical range question
+     */
+    @Override
+    public ArrayList<String> getAnswers(){
+        return answers;
     }
 }
 
