@@ -1,7 +1,7 @@
 package surveyMonkey;
 
 import java.util.ArrayList;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class MultipleChoiceQuestion extends Question {

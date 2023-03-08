@@ -1,6 +1,6 @@
 package surveyMonkey;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class Survey {
     private Integer id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Question.class)
     private List<Question> questions;
     private boolean open;
 
