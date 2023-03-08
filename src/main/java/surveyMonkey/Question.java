@@ -93,6 +93,6 @@ public class Question {
     /**
      * Allows the surveyor to get the answer of the questions
      */
-    public List<String> getAnswers() { return answer; }
+    public ArrayList<String> getAnswers() { return answer; }
 
 }

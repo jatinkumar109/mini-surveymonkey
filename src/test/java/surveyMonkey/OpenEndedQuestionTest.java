@@ -12,7 +12,7 @@ public class OpenEndedQuestionTest {
     private OpenEndedQuestion openQuestion;
 
     /**
-     * This method starts an open ended question to be tested for
+     * This method starts an open-ended question to be tested for
      */
     @Before
     public void initialize() {
