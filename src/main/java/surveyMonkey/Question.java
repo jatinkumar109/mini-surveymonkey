@@ -1,7 +1,11 @@
 package surveyMonkey;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
+/**
+ * This class handles all the type of questions
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Question {
@@ -53,24 +57,42 @@ public class Question {
         this.upperBound = upperBound;
     }
 
+    /**
+     * Getter the question
+     */
     public String getQuestion() {
         return question;
     }
 
+    /**
+     * Getter for the question type
+     */
     public QuestionType getQuestionType() {
         return questionType;
     }
 
+    /**
+     * Getter for the question options
+     */
     public ArrayList<String> getOptions() { return options; }
 
+    /**
+     * Assigns the minimum value for the numerical range questions
+     */
     public int getLowerBound() {
         return lowerBound;
     }
 
+    /**
+     * Assigns the maximum value for the numerical range questions
+     */
     public int getUpperBound() {
         return upperBound;
     }
 
-    public ArrayList getAnswers() { return answer; }
+    /**
+     * Allows the surveyor to get the answer of the questions
+     */
+    public List<String> getAnswers() { return answer; }
 
 }
