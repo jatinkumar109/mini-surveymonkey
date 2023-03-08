@@ -2,6 +2,9 @@ package surveyMonkey;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,7 +20,7 @@ public class NumericalRangeQuestionTest {
      */
     @Test
     public void setAnswerTest(){
-        assertTrue(rq1.setAnswers(5F));
+        assertTrue(rq1.setAnswer("5"));
     }
 
     /**
