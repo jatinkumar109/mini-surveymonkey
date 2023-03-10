@@ -1,41 +1,65 @@
 package surveyMonkey;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import surveyMonkey.model.NumericalRangeQuestion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * This class tests the functionality of the Numerical Range Questions.
- */
 public class NumericalRangeQuestionTest {
-    NumericalRangeQuestion rq1 = new NumericalRangeQuestion("2+3?", 1, 10);
 
-    /**
-     * This method checks if the numerical input is set to
-     * a survey question properly, as an answer
-     */
-    @Test
-    public void setAnswerTest(){
-        assertTrue(rq1.setAnswers(5F));
+    private NumericalRangeQuestion question;
+
+    @BeforeEach
+    public void setUp() {
+        question = new NumericalRangeQuestion("What is your age?", 18, 100);
     }
 
-    /**
-     * Getter for the upper bound value of a question's answer
-     */
     @Test
-    public void getUpperBoundTest(){
-        float UB = rq1.getUpperBound();
-        assertEquals(UB, 10);
-
+    public void testGetMin() {
+        assertEquals(18, question.getMin());
     }
 
-    /**
-     * Getter for the lower bound value of a question's answer
-     */
     @Test
-    public void getLowerBoundTest(){
-        float LB = rq1.getLowerBound();
-        assertEquals(LB,1);
+    public void testSetMin() {
+        question.setMin(21);
+        assertEquals(21, question.getMin());
     }
+
+    @Test
+    public void testGetMax() {
+        assertEquals(100, question.getMax());
+    }
+
+    @Test
+    public void testSetMax() {
+        question.setMax(110);
+        assertEquals(110, question.getMax());
+    }
+
+    @Test
+    public void testSetAnswer() {
+        question.setAnswer("25");
+        List<Integer> expected = new ArrayList<>();
+        expected.add(25);
+        assertEquals(expected, question.getAnswers());
+    }
+
+    @Test
+    public void testSetAnswers() {
+        List<Integer> answers = new ArrayList<>();
+        answers.add(30);
+        answers.add(35);
+        question.setAnswers(answers);
+        assertEquals(answers, question.getAnswers());
+    }
+
+    @Test
+    public void testGetType() {
+        assertEquals("NR", question.getType());
+    }
+
 }

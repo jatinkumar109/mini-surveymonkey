@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Questions</title>
+</head>
+<body>
+<h1>Add Questions to <span th:text="${title}"></span></h1>
+
+<form th:object="${multipleChoiceQuestion}" th:action="@{/addMultipleChoiceQuestion}" method="post">
+    <h2>Multiple Choice Question</h2>
+    <label for="mc-question">Question:</label>
+    <input type="text" id="mc-question" th:field="*{questionText}" th:required />
+
+    <div>
+        <label for="mc-option-1">Option 1:</label>
+        <input type="text" id="mc-option-1" th:field="*{options[0]}" th:required />
+    </div>
+    <div>
+        <label for="mc-option-2">Option 2:</label>
+        <input type="text" id="mc-option-2" th:field="*{options[1]}" th:required />
+    </div>
+    <div>
+        <label for="mc-option-3">Option 3:</label>
+        <input type="text" id="mc-option-3" th:field="*{options[2]}" th:required />
+    </div>
+    <div>
+        <label for="mc-option-4">Option 4:</label>
+        <input type="text" id="mc-option-4" th:field="*{options[3]}" th:required />
+    </div>
+
+    <button type="submit">Add to Survey</button>
+</form>
+
+<hr>
+
+<!-- Form section for creating a numerical range question -->
+<form  th:object="${numericalRangeQuestion}" th:action="@{/addNumericalRangeQuestion}" method="post">
+    <h2>Numerical Range Question</h2>
+    <label for="numerical-question">Question:</label>
+    <input type="text" id="numerical-question" th:field="*{questionText}" th:required />
+
+    <div>
+        <label for="lower-bound">Lower Bound:</label>
+        <input type="number" id="lower-bound" th:field="*{min}" th:required />
+    </div>
+    <div>
+        <label for="upper-bound">Upper Bound:</label>
+        <input type="number" id="upper-bound" th:field="*{max}"  th:required />
+    </div>
+
+    <button type="submit" >Add to Survey</button>
+</form>
+
+<hr>
+
+<!-- Form section for creating an open-ended question -->
+<form  th:object="${openEndedQuestion}" th:action="@{/addOpenEndedQuestion}" method="post">
+    <h2>Open-Ended Question</h2>
+    <label for="open-ended-question">Question:</label>
+    <input type="text" id="open-ended-question" th:field="*{questionText}" th:required />
+
+    <button type="submit">Add to Survey</button>
+</form>
+
+</body>
+</html>
+
+

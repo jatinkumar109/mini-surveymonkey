@@ -2,7 +2,10 @@ package surveyMonkey;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import surveyMonkey.model.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,40 +17,29 @@ class SurveyTest {
         survey = new Survey("Test Survey");
     }
 
-    @Test
-    void testGetName() {
-        assertEquals("Test Survey", survey.getName());
-    }
 
     @Test
-    void testSetName() {
-        survey.setName("New Survey Name");
-        assertEquals("New Survey Name", survey.getName());
+    public void testAddQuestions() {
+        // create a new multiple choice question object
+        List<String> options = new ArrayList<>(Arrays.asList("Red", "Green", "Blue"));
+        MultipleChoiceQuestion mcQ = new MultipleChoiceQuestion("What is your favorite color?", options);
+        NumericalRangeQuestion nrQ = new NumericalRangeQuestion("What is your age?", 18, 100);
+        OpenEndedQuestion oeQ = new OpenEndedQuestion("What is your favorite color?");
+
+        // add the multiple choice question to the survey
+        survey.addQuestion(mcQ);
+        survey.addQuestion(nrQ);
+        survey.addQuestion(oeQ);
+
+        // assert that the survey has 3 question and it's the multiple choice question
+        assertEquals(3, survey.getQuestions().size());
+        assertEquals(mcQ, survey.getQuestion(0));
+        assertEquals(nrQ, survey.getQuestion(1));
+        assertEquals(oeQ, survey.getQuestion(2));
     }
 
-    @Test
-    void testGetId() {
-        assertNull(survey.getId());
-    }
 
 
-    @Test
-    void testGetQuestions() {
-        List<Question> questions = new ArrayList<>();
-        OpenEndedQuestion question1 = new OpenEndedQuestion("What is your name?");
-        OpenEndedQuestion question2 = new OpenEndedQuestion("What is your age?");
-        questions.add(question1);
-        questions.add(question2);
-        survey.setQuestions(questions);
-        assertEquals(questions, survey.getQuestions());
-    }
-
-    @Test
-    void testAddQuestion() {
-        OpenEndedQuestion question = new OpenEndedQuestion("What is your favorite color?");
-        survey.addQuestion(question);
-        assertEquals(question, survey.getQuestions().get(0));
-    }
 
     @Test
     void testClose() {

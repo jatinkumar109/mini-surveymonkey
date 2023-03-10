@@ -2,13 +2,10 @@ package surveyMonkey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import surveyMonkey.repo.SurveyRepository;
 
 /**
  * This class handles and controls the operations of a survey.
@@ -18,17 +15,24 @@ import java.util.Arrays;
 
 public class SurveyRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(SurveyRunner.class);
+    private final SurveyRepository repository;
 
-    public static void main(String[] args){
-        SpringApplication.run(SurveyRunner.class);
+    @Autowired
+    public SurveyRunner(SurveyRepository repository) {
+        this.repository = repository;
     }
+
+    public static void main(String[] args) {
+        SpringApplication.run(SurveyRunner.class, args);
+    }
+}
 
     /**
      * Saves and fetches customer from a survey
      * @param repository
      * @return
      */
+    /**
     @Bean
     public CommandLineRunner demo(SurveyRepository repository) {
         return (args) -> {
@@ -49,3 +53,5 @@ public class SurveyRunner {
         };
     }
 }
+
+     **/

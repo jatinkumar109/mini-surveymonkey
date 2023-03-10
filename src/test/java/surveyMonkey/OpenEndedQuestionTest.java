@@ -1,38 +1,43 @@
 package surveyMonkey;
 
-import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import surveyMonkey.model.OpenEndedQuestion;
 
-/**
- * This class tests for the functionality of the Open Ended Questions.
- */
+import java.util.List;
+import static org.junit.Assert.*;
+
 public class OpenEndedQuestionTest {
-    private OpenEndedQuestion openQuestion;
 
-    /**
-     * This method starts an open ended question to be tested for
-     */
-    @Before
-    public void initialize() {
-        openQuestion = new OpenEndedQuestion("Whats your height?");
+    @Test
+    public void testGetQuestionText() {
+        String questionText = "What is your favorite color?";
+        OpenEndedQuestion question = new OpenEndedQuestion(questionText);
+        assertEquals(questionText, question.getQuestionText());
     }
 
-    /**
-     * This method checks if the answer is added to the survey properly
-     */
+
+
     @Test
-    public void testAddAnswer() {
-        boolean response = openQuestion.setAnswers("6ft (big man)");
-        assertEquals(response, true);
+    public void testSetAnswer() {
+        OpenEndedQuestion question = new OpenEndedQuestion("What is your favorite color?");
+        String answer = "Blue";
+        question.setAnswer(answer);
+        List<String> answers = question.getAnswers();
+        assertEquals(1, answers.size());
+        assertEquals(answer, answers.get(0));
     }
 
-    /**
-     * This method checks the return of a proper question type
-     */
     @Test
-    public void testGetQuestionType() {
-        assertEquals(openQuestion.getQuestionType(), QuestionType.OPEN_ENDED);
+    public void testSetAnswers() {
+        OpenEndedQuestion question = new OpenEndedQuestion("What is your favorite color?");
+        List<String> answers = List.of("Red", "Green", "Blue");
+        question.setAnswers(answers);
+        assertEquals(answers, question.getAnswers());
+    }
+
+    @Test
+    public void testGetType() {
+        OpenEndedQuestion question = new OpenEndedQuestion("What is your favorite color?");
+        assertEquals("OE", question.getType());
     }
 }

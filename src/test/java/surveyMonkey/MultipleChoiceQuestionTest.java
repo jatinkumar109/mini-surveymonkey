@@ -1,57 +1,62 @@
 package surveyMonkey;
-
-import org.junit.Before;
-import org.junit.Test;
-import surveyMonkey.MultipleChoiceQuestion;
-import surveyMonkey.QuestionType;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import surveyMonkey.model.MultipleChoiceQuestion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- * This class tests the functionality of the Multiple Choice Questions.
- */
 public class MultipleChoiceQuestionTest {
+    private MultipleChoiceQuestion mcQuestion;
 
-    private MultipleChoiceQuestion mcq;
+    @BeforeEach
+    public void setUp() {
+        List<String> options = new ArrayList<>(Arrays.asList("Red", "Green", "Blue"));
+        mcQuestion = new MultipleChoiceQuestion("What is your favorite color?", options);
 
-    /**
-     * This method starts a mcq question to be tested for
-     */
-    @Before
-    public void initialize() {
-        ArrayList<String> options = new ArrayList<String>();
-        options.add("Toronto");
-        options.add("Calgary");
-        options.add("Ottawa");
-        options.add("Edmonton");
-        mcq = new MultipleChoiceQuestion("whats the capital of Canada", options);
+
     }
 
-    /**
-     * Checks if the options are correctly placed in a MCQ question
-     */
     @Test
-    public void methodTest(){
-        assertEquals(mcq.getOptions().get(0), "Toronto");
+    public void testGetOptions() {
+        List<String> options = mcQuestion.getOptions();
+        Assertions.assertEquals(3, options.size());
+        Assertions.assertTrue(options.contains("Red"));
+        Assertions.assertTrue(options.contains("Green"));
+        Assertions.assertTrue(options.contains("Blue"));
     }
 
-    /**
-     * This method checks if the answer is added to the survey question properly
-     */
     @Test
-    public void testAddAnswer() {
-        assertTrue(mcq.setAnswer("Ottawa"));
-        assertEquals(mcq.getAnswers().get(0), "Ottawa");
+    public void testAddOption() {
+        mcQuestion.addOption("Yellow");
+        List<String> options = mcQuestion.getOptions();
+        Assertions.assertEquals(4, options.size());
+        Assertions.assertTrue(options.contains("Yellow"));
     }
 
-    /**
-     * This method checks the return of a proper question type
-     */
     @Test
-    public void testGetQuestionType() {
-        assertEquals(mcq.getQuestionType(), QuestionType.MULTIPLE_CHOICE);
+    public void testGetAnswers() {
+        mcQuestion.setAnswer("1");
+        mcQuestion.setAnswer("2");
+        List<String> answers = mcQuestion.getAnswers();
+        Assertions.assertEquals(2, answers.size());
+        Assertions.assertTrue(answers.contains("1"));
+        Assertions.assertTrue(answers.contains("2"));
+    }
+
+    @Test
+    public void testSetAnswers() {
+        mcQuestion.setAnswers(List.of("1", "2"));
+        List<String> answers = mcQuestion.getAnswers();
+        Assertions.assertEquals(2, answers.size());
+        Assertions.assertTrue(answers.contains("1"));
+        Assertions.assertTrue(answers.contains("2"));
+    }
+
+    @Test
+    public void testGetType() {
+        Assertions.assertEquals("MC", mcQuestion.getType());
     }
 }
