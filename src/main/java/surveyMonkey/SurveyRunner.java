@@ -1,8 +1,6 @@
 package surveyMonkey;
 
 import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,11 +17,12 @@ import java.util.List;
 
 public class SurveyRunner {
 
-    private final SurveyRepository repository;
+    private final SurveyRepository surveyRepository;
+
 
     @Autowired
-    public SurveyRunner(SurveyRepository repository) {
-        this.repository = repository;
+    public SurveyRunner(SurveyRepository surveyRepository) {
+        this.surveyRepository = surveyRepository;
     }
 
     public static void main(String[] args) {
@@ -38,16 +37,18 @@ public class SurveyRunner {
         survey1.getQuestion(0).setAnswer("Red");
         survey1.getQuestion(1).setAnswer("2");
 
-        repository.save(survey1);
+        surveyRepository.save(survey1);
 
         Survey survey2 = new Survey("Survey 2");
         survey2.addQuestion(new OpenEndedQuestion("What is your opinion on global warming?"));
         survey2.addQuestion(new MultipleChoiceQuestion("Do you prefer cats or dogs?", List.of("Cats", "Dogs")));
         survey2.getQuestion(0).setAnswer("Global Warming is now called Climate Change");
         survey2.getQuestion(1).setAnswer("Cats");
-        repository.save(survey2);
+        surveyRepository.save(survey2);
 
     }
+
+
 }
     /**
      * Saves and fetches customer from a survey
