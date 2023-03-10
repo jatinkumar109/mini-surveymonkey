@@ -14,7 +14,7 @@ public class NumericalRangeQuestion extends Question {
 
     private  int min;
     private  int max;
-    private List<Integer> answers;
+    private List<String> answers;
 
 
 
@@ -52,12 +52,12 @@ public class NumericalRangeQuestion extends Question {
     }
     @Override
     public void setAnswer(String answer){
-        this.answers.add(Integer.parseInt(answer));
+        this.answers.add(answer);
     }
-    public void setAnswers(List<Integer> answers){
+    public void setAnswers(List<String> answers){
         this.answers = answers;
     }
-    public List<Integer> getAnswers() {
+    public List<String> getAnswers() {
         return answers;
     }
 

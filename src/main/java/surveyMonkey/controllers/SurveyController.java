@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import surveyMonkey.model.*;
 import surveyMonkey.repo.SurveyRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 /**
  * This class handles and controls the survey operations.
  * Creating Survey
@@ -110,27 +106,34 @@ public class SurveyController {
     }
 
     @GetMapping("/fillSurvey")
-    public String fillSurvey(Model model) {
-        Survey survey = repository.findById(1L).get();
+    public String fillSurvey(@RequestParam("surveyID") Long surveyID, Model model) {
+        Survey survey = repository.findById(surveyID).get();
         model.addAttribute("survey", survey);
         // process the form data
         return "fillSurvey";
     }
     @PostMapping("/submitSurvey")
     public String submitSurvey(Model model, HttpServletRequest request) {
-        Long surveyId = Long.parseLong(request.getParameter("surveyId"));
+        Long surveyId = Long.parseLong(request.getParameter("surveyID"));
         Survey survey = repository.findById(surveyId).get();
         for (Question question : survey.getQuestions()) {
             String answer = request.getParameter("answer-" + question.getId());
             System.out.println(answer);
             question.setAnswer(answer);
         }
-        repository.save(survey);
+
         for (Question question : survey.getQuestions()) {
             System.out.println(question);
 
         }
+        repository.save(survey);
         return "/submitSurvey";
+    }
+    @GetMapping("/listSurveys")
+    public String getSurveys(Model model) {
+        Iterable<Survey> surveys = repository.findAll();
+        model.addAttribute("surveys", surveys);
+        return "listSurveys";
     }
 
 

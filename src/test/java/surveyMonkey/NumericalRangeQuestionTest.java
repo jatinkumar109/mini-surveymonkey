@@ -50,9 +50,9 @@ public class NumericalRangeQuestionTest {
 
     @Test
     public void testSetAnswers() {
-        List<Integer> answers = new ArrayList<>();
-        answers.add(30);
-        answers.add(35);
+        List<String> answers = new ArrayList<>();
+        answers.add("30");
+        answers.add("35");
         question.setAnswers(answers);
         assertEquals(answers, question.getAnswers());
     }
