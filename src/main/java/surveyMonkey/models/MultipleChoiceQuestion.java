@@ -1,4 +1,4 @@
-package surveyMonkey;
+package surveyMonkey.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +54,19 @@ public class MultipleChoiceQuestion extends Question {
     public boolean setAnswer(String option) {
         return this.answers.add(option);
     }
+    public boolean addAnswers(List<String> options) {
+        return this.answers.addAll(options);
+    }
 
     public List<String> getAnswers() {
         return answers;
+    }
+    @Override
+    public String toString() {
+        return "MultipleChoiceQuestion{" +
+                "question=" + this.getQuestion() +
+                "options=" + this.options +
+                ", answers=" + this.answers +
+                '}';
     }
 }

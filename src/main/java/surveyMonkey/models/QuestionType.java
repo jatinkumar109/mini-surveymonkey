@@ -1,4 +1,4 @@
-package surveyMonkey;
+package surveyMonkey.models;
 
 /**
  * This class declares all the Question types available.

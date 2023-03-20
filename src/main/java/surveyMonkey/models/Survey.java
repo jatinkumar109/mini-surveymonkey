@@ -1,4 +1,4 @@
-package surveyMonkey;
+package surveyMonkey.models;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -11,55 +11,55 @@ import java.util.List;
 @Entity
 public class Survey {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Integer id;
-    private String name;
+    private Long id;
+    private String title;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Question.class)
     private List<Question> questions;
-    private boolean open;
+    private boolean isOpen;
 
 
     public Survey() {
         this.questions = new ArrayList<>();
-        this.open = true;
+        this.isOpen = true;
     }
 
 
-    public Survey(String name) {
-        this.name = name;
+    public Survey(String title) {
+        this.title = title;
         this.questions = new ArrayList<>();
-        this.open = true;
+        this.isOpen = true;
     }
 
 
-    public Survey(String name, List<Question> questions) {
-        this.name = name;
+    public Survey(String title, List<Question> questions) {
+        this.title = title;
         this.questions = questions;
-        this.open = true;
+        this.isOpen = true;
 
     }
 
     /**
      * Setter for the person name filling out the survey.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     /**
      * Getter for person name filling out the survey.
      */
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return this.title;
     }
 
 
     /**
      * Getter for the survey ID.
      */
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
@@ -81,11 +81,13 @@ public class Survey {
     /**
      * This method closes/exits the survey.
      */
-    public void close() {
-        this.open = false;
+    public void setClose() {
+        this.isOpen = false;
     }
 
-
+    public void setOpen(boolean open) {
+        this.isOpen = open;
+    }
     /**
      * This function is used to add a new question to the list of questions in a
      * @param questionAdded: the new Question object to be added the Survey
@@ -94,8 +96,8 @@ public class Survey {
         this.questions.add(questionAdded);
     }
 
-    public boolean isOpen() {
-        return this.open;
+    public boolean getIsOpen() {
+        return this.isOpen;
     }
 }
 
