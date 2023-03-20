@@ -6,6 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import surveyMonkey.models.MultipleChoiceQuestion;
+import surveyMonkey.models.NumericalRangeQuestion;
+import surveyMonkey.models.OpenEndedQuestion;
+import surveyMonkey.models.Survey;
+import surveyMonkey.repositories.SurveyRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;

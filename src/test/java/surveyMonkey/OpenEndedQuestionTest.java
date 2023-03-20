@@ -2,7 +2,9 @@ package surveyMonkey;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
+import surveyMonkey.models.OpenEndedQuestion;
+import surveyMonkey.models.QuestionType;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

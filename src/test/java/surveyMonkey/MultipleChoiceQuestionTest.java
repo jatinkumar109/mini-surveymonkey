@@ -2,8 +2,8 @@ package surveyMonkey;
 
 import org.junit.Before;
 import org.junit.Test;
-import surveyMonkey.MultipleChoiceQuestion;
-import surveyMonkey.QuestionType;
+import surveyMonkey.models.MultipleChoiceQuestion;
+import surveyMonkey.models.QuestionType;
 
 import java.util.ArrayList;
 

@@ -2,6 +2,10 @@ package surveyMonkey;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import surveyMonkey.models.OpenEndedQuestion;
+import surveyMonkey.models.Question;
+import surveyMonkey.models.Survey;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,13 +20,13 @@ class SurveyTest {
 
     @Test
     void testGetName() {
-        assertEquals("Test Survey", survey.getName());
+        assertEquals("Test Survey", survey.getTitle());
     }
 
     @Test
     void testSetName() {
-        survey.setName("New Survey Name");
-        assertEquals("New Survey Name", survey.getName());
+        survey.setTitle("New Survey Name");
+        assertEquals("New Survey Name", survey.getTitle());
     }
 
     @Test
@@ -51,7 +55,7 @@ class SurveyTest {
 
     @Test
     void testClose() {
-        survey.close();
-        assertFalse(survey.isOpen());
+        survey.setClose();
+        assertFalse(survey.getIsOpen());
     }
 }

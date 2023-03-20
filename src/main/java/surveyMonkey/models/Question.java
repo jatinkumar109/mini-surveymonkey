@@ -1,5 +1,4 @@
-package surveyMonkey;
-import java.util.ArrayList;
+package surveyMonkey.models;
 import jakarta.persistence.*;
 
 
@@ -58,4 +57,5 @@ public abstract class Question {
         this.question = question;
     }
 
+    public abstract boolean setAnswer(String object);
 }
