@@ -35,8 +35,8 @@ public class OpenEndedQuestion extends Question {
      * Getter for the question types
      * @return
      */
-    public QuestionType getQuestionType() {
-        return questionType;
+    public String getQuestionType() {
+        return questionType.name();
     }
 
     /**
