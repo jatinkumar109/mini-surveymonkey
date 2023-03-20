@@ -43,8 +43,8 @@ public class MultipleChoiceQuestion extends Question {
         this.options = options;
     }
 
-    public QuestionType getQuestionType() {
-        return questionType;
+    public String getQuestionType() {
+        return questionType.name();
     }
 
     /**
@@ -54,6 +54,7 @@ public class MultipleChoiceQuestion extends Question {
     public boolean setAnswer(String option) {
         return this.answers.add(option);
     }
+
     public boolean addAnswers(List<String> options) {
         return this.answers.addAll(options);
     }
@@ -64,7 +65,7 @@ public class MultipleChoiceQuestion extends Question {
     @Override
     public String toString() {
         return "MultipleChoiceQuestion{" +
-                "question=" + this.getQuestion() +
+                "question=" + this.getQuestionText() +
                 "options=" + this.options +
                 ", answers=" + this.answers +
                 '}';

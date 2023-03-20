@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Survey Questions</title>
+</head>
+<body>
+<h1>Survey Questions</h1>
+<form th:object="${survey}" th:action="@{/submitSurvey}" method="post">
+  <input type="hidden" th:name="surveyID" th:value="${survey.id}"/>
+  <table>
+    <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="q : ${survey.questions}">
+      <td th:text="${q.questionText}"></td>
+      <td th:switch="${q.getQuestionType()}">
+        <div th:case="'MULTIPLE_CHOICE'">
+          <ul>
+            <li th:each="opt : ${q.options}">
+              <label>
+                <input type="radio" th:name="${'answer-' + q.id}" th:value="${opt}"/>
+                <span th:text="${opt}"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div th:case="'NUMERICAL_RANGE'">
+          <label>
+            <input type="number" th:name="${'answer-' + q.id}" th:min="${q.min}" th:max="${q.max}"/>
+          </label>
+        </div>
+        <div th:case="'OPEN_ENDED'">
+          <label>
+            <textarea th:name="${'answer-' + q.id}" th:rows="5" th:cols="50"></textarea>
+          </label>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="submit">Submit Survey</button>
+</form>
+<a href="/">Back to Home</a>
+
+</body>
+</html>

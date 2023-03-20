@@ -12,14 +12,14 @@ public abstract class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String question;
+    private String questionText;
 
 
     public Question() {}
 
 
     public Question(String question) {
-        this.question = question;
+        this.questionText = question;
     }
 
     /**
@@ -44,18 +44,20 @@ public abstract class Question {
      * Getter for all question types
      * @return
      */
-    public String getQuestion() {
-        return question;
+    public String getQuestionText() {
+        return questionText;
     }
 
 
     /**
      * Setter for Questions
-     * @param question
+     * @param questionText
      */
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
     public abstract boolean setAnswer(String object);
+
+    public abstract String getQuestionType();
 }

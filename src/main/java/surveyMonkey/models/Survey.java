@@ -99,5 +99,9 @@ public class Survey {
     public boolean getIsOpen() {
         return this.isOpen;
     }
+
+    public Question getQuestion(int i) {
+        return this.questions.get(i);
+    }
 }
 

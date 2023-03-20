@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Question List</title>
+</head>
+<body>
+<h1>Question Added!</h1>
+<table>
+  <tr>
+    <th>Question Text</th>
+    <th>Question Type</th>
+    <th>Options / Min-Max</th>
+  </tr>
+  <tr th:each="q : ${questions}">
+    <td th:text="${q.questionText}"></td>
+    <td th:text="${q.getQuestionType()}"></td>
+    <td th:switch="${q.getQuestionType()}">
+      <div th:case="'MULTIPLE_CHOICE'">
+        <ul>
+          <li th:each="opt : ${q.options}" th:text="${opt}"></li>
+        </ul>
+      </div>
+      <div th:case="'NUMERICAL_RANGE'" th:text="${q.min} + ' - ' + ${q.max}"></div>
+    </td>
+  </tr>
+</table>
+<a href="/">Back to Home</a>
+<a href="/addQuestions">Add more Questions</a>
+</body>
+</html>

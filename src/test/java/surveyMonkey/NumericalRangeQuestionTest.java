@@ -26,7 +26,7 @@ public class NumericalRangeQuestionTest {
      */
     @Test
     public void getUpperBoundTest(){
-        float UB = rq1.getUpperBound();
+        float UB = rq1.getMax();
         assertEquals(UB, 10);
 
     }
@@ -36,7 +36,7 @@ public class NumericalRangeQuestionTest {
      */
     @Test
     public void getLowerBoundTest(){
-        float LB = rq1.getLowerBound();
+        float LB = rq1.getMin();
         assertEquals(LB,1);
     }
 }
