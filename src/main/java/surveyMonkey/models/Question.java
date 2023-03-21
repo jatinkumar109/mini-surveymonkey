@@ -15,7 +15,7 @@ public abstract class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String questionText;
-    private Set<Answer> answers;
+    private Set<Answers> answers;
 
 
     public Question() {}
