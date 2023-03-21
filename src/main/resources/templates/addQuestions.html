@@ -5,9 +5,10 @@
     <title>Add Questions</title>
 </head>
 <body>
-<h1>Add Questions to <span th:text="${title}"></span></h1>
+<h1>Add Questions to <span th:text="${survey.getTitle()}"></span></h1>
 
 <form th:object="${multipleChoiceQuestion}" th:action="@{/addMultipleChoiceQuestion}" method="post">
+    <input type="hidden" th:name="surveyID" th:value="${survey.getId()}"/>
     <h2>Multiple Choice Question</h2>
     <label for="mc-question">Question:</label>
     <input type="text" id="mc-question" th:field="*{questionText}" th:required />
@@ -37,6 +38,7 @@
 <!-- Form section for creating a numerical range question -->
 <form  th:object="${numericalRangeQuestion}" th:action="@{/addNumericalRangeQuestion}" method="post">
     <h2>Numerical Range Question</h2>
+    <input type="hidden" th:name="surveyID" th:value="${survey.getId()}"/>
     <label for="numerical-question">Question:</label>
     <input type="text" id="numerical-question" th:field="*{questionText}" th:required />
 
@@ -57,6 +59,7 @@
 <!-- Form section for creating an open-ended question -->
 <form  th:object="${openEndedQuestion}" th:action="@{/addOpenEndedQuestion}" method="post">
     <h2>Open-Ended Question</h2>
+    <input type="hidden" th:name="surveyID" th:value="${survey.getId()}"/>
     <label for="open-ended-question">Question:</label>
     <input type="text" id="open-ended-question" th:field="*{questionText}" th:required />
 

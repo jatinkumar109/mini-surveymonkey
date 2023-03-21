@@ -7,8 +7,14 @@
   <title>Survey Created</title>
 </head>
 <body>
+
 <h1>Survey Created!</h1>
 <p th:text="'The Survey ' + ${title} + ' has been created.'" />
-<a href="/addQuestions">Add Questions</a>
+<form  th:action="@{/addQuestions}" method="post">
+
+  <input type="hidden" th:name="surveyID" th:value="${surveyID}"/>
+
+  <button type="submit">Add Questions to Survey</button>
+</form>
 </body>
 </html>
