@@ -34,16 +34,22 @@ public class SurveyController {
                                      @ModelAttribute Survey survey
     ) {
         repository.save(survey);
+        model.addAttribute("surveyID",survey.getId());
+
         model.addAttribute("title", survey.getTitle());
+        //model.addAttribute("surveyID", survey.getId());
+
         // process the form data
         return "surveyCreated";
     }
 
-    @GetMapping("/addQuestions")
-    public String addQuestions(Model model) {
-        Survey survey = repository.findById(1L).get();
-        model.addAttribute("title", survey.getTitle());
-
+    @PostMapping("/addQuestions")
+    public String addQuestions(Model model,
+                               @RequestParam("surveyID") Long surveyID) {
+        Survey survey = repository.findById(surveyID).get();
+        model.addAttribute("survey", survey);
+        model.addAttribute("title",survey.getTitle());
+        model.addAttribute("surveyID",survey.getId());
         MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
         NumericalRangeQuestion numericalRangeQuestion = new NumericalRangeQuestion();
         OpenEndedQuestion openEndedQuestion = new OpenEndedQuestion();
@@ -56,12 +62,16 @@ public class SurveyController {
 
     @PostMapping("/addMultipleChoiceQuestion")
     public String addMultipleChoiceQuestion(Model model,
-                                            @ModelAttribute MultipleChoiceQuestion mcQ) {
-        Survey survey = repository.findById(1L).get();
+                                            @ModelAttribute MultipleChoiceQuestion mcQ,
+                                            @RequestParam("surveyID")Long surveyID) {
+        Survey survey = repository.findById(surveyID).get();
         survey.addQuestion(mcQ);
         repository.save(survey);
+
         model.addAttribute("title", survey.getTitle());
         model.addAttribute("questions", survey.getQuestions());
+        model.addAttribute("surveyID", survey.getId());
+
 
         // process the form data
         return "questionAdded";
@@ -69,12 +79,15 @@ public class SurveyController {
 
     @PostMapping("/addNumericalRangeQuestion")
     public String addNumericalRangeQuestion(Model model,
-                                            @ModelAttribute NumericalRangeQuestion nrQ) {
-        Survey survey = repository.findById(1L).get();
+                                            @ModelAttribute NumericalRangeQuestion nrQ,
+                                            @RequestParam("surveyID")Long surveyID) {
+        Survey survey = repository.findById(surveyID).get();
         survey.addQuestion(nrQ);
         repository.save(survey);
         model.addAttribute("title", survey.getTitle());
         model.addAttribute("questions", survey.getQuestions());
+        model.addAttribute("surveyID", survey.getId());
+
 
         // process the form data
         return "questionAdded";
@@ -82,13 +95,16 @@ public class SurveyController {
 
     @PostMapping("/addOpenEndedQuestion")
     public String addOpenEndedQuestion(Model model,
-                                       @ModelAttribute OpenEndedQuestion oeQ) {
+                                       @ModelAttribute OpenEndedQuestion oeQ,
+                                       @RequestParam("surveyID")Long surveyID) {
         // Create a new OpenEndedQuestion object
-        Survey survey = repository.findById(1L).get();
+        Survey survey = repository.findById(surveyID).get();
         survey.addQuestion(oeQ);
         repository.save(survey);
         model.addAttribute("title", survey.getTitle());
         model.addAttribute("questions", survey.getQuestions());
+        model.addAttribute("surveyID", survey.getId());
+
 
         // process the form data
         return "questionAdded";
