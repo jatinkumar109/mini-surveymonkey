@@ -2,7 +2,9 @@ package surveyMonkey.models;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+
 import java.util.List;
+
 
 /**
  * This class is the main initiator of the survey.
