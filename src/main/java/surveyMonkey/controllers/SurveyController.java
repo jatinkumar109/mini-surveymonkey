@@ -147,6 +147,10 @@ public class SurveyController {
         return "listSurveys";
     }
 
-
-
+    @GetMapping("/displayResults")
+    public String displayResults(@RequestParam("surveyID") Long surveyID, Model model) {
+        Survey survey = repository.findById(surveyID).get();
+        model.addAttribute("survey", survey);
+        return "displayResults";
+    }
 }

@@ -1,6 +1,9 @@
 package surveyMonkey.models;
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * This class handles all the type of questions
@@ -13,6 +16,7 @@ public abstract class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String questionText;
+    //private Set<Answers> answers;
 
 
     public Question() {}
@@ -60,4 +64,10 @@ public abstract class Question {
     public abstract boolean setAnswer(String object);
 
     public abstract String getQuestionType();
+
+    public abstract List<String> getAnswers();
+
+    //public int getAnsSize() {
+        //return answers.size();
+    //}
 }

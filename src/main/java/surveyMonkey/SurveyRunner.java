@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * This class handles and controls the operations of a survey.
  @@ -18,17 +17,45 @@
-**/
+ **/
 @SpringBootApplication
- public class SurveyRunner {
+public class SurveyRunner {
 
     private final SurveyRepository surveyRepository;
 
@@ -76,6 +76,3 @@ import java.util.List;
 
     }
 }
-
-
-
