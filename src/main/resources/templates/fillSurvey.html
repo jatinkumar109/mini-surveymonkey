@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Survey Questions</h1>
-<form th:object="${survey}" th:action="@{/submitSurvey}" method="post" class="my-5">>
+<form th:object="${survey}" th:action="@{/submitSurvey}" method="post" class="my-5">
   <input type="hidden" th:name="surveyID" th:value="${survey.id}"/>
   <table>
     <thead>
