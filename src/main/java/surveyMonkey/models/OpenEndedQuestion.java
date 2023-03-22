@@ -10,7 +10,7 @@ import java.util.List;
 public class OpenEndedQuestion extends Question {
 
     @ElementCollection(targetClass=String.class)
-    private List<String> answer = new ArrayList<>();
+    private List<String> answers = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
     private static final QuestionType questionType = QuestionType.OPEN_ENDED;
@@ -27,8 +27,10 @@ public class OpenEndedQuestion extends Question {
      * Getter for answers
      * @return
      */
+
+    @Override
     public List<String> getAnswers() {
-        return this.answer;
+        return this.answers;
     }
 
     /**
@@ -43,7 +45,7 @@ public class OpenEndedQuestion extends Question {
      * Setter for the answers
      */
     public boolean setAnswer(String answer) {
-        return this.answer.add(answer);
+        return this.answers.add(answer);
     }
 
 }

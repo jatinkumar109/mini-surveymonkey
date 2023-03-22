@@ -1,6 +1,7 @@
 package surveyMonkey.models;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,7 +16,7 @@ public abstract class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String questionText;
-    private Set<Answers> answers;
+    //private Set<Answers> answers;
 
 
     public Question() {}
@@ -64,9 +65,9 @@ public abstract class Question {
 
     public abstract String getQuestionType();
 
-    public abstract Object getAnswers();
+    public abstract List<String> getAnswers();
 
-    public int getAnsSize() {
-        return answers.size();
-    }
+    //public int getAnsSize() {
+        //return answers.size();
+    //}
 }

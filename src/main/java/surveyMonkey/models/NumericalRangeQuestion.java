@@ -51,6 +51,7 @@ public class NumericalRangeQuestion extends Question {
      */
     public Float getMax() { return this.max; }
 
+    @Override
     public List<String> getAnswers() {
         return this.answers;
     }

@@ -59,9 +59,11 @@ public class MultipleChoiceQuestion extends Question {
         return this.answers.addAll(options);
     }
 
+    @Override
     public List<String> getAnswers() {
         return answers;
     }
+
     @Override
     public String toString() {
         return "MultipleChoiceQuestion{" +
