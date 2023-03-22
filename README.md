@@ -44,7 +44,7 @@ OpendEndedQuestionTest to test creating and answering different types of questio
 
 ## 📄 Current Project iteration
 
-###### Milestone 2: MiniSurveyMokey Functional Web App with security and authentication, Database integration, and Testing
+###### Milestone 2: MiniSurveyMonkey Functional Web App with security and authentication, Database integration, and Testing
 
 **Implementation**
 
