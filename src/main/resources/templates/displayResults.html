@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <meta charset="UTF-8">
     <title>Survey Results</title>
 </head>
 <body>
-<h1>Survey Results</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Question</th>
-        <th>Answers</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterate over the questions and their answers -->
-    <tr th:each="q : ${survey.questions}">
-        <td th:text="${q.questionText}"></td>
-        <td>
-            <!-- Display the answers based on the question type -->
-            <div th:switch="${q.getQuestionType()}">
-                <div th:case="'MULTIPLE_CHOICE'">
-                    <!-- Display all selected options for multiple choice questions -->
-                    <ul>
-                        <li th:each="answer : ${q.getAnswers()}">
-                            <span th:text="${answer}"></span>
-                        </li>
-                    </ul>
+<div class="header">
+
+    <h1>Survey Results</h1>
+    <h2 th:text="${survey.title} " />
+
+</div>
+<form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Question</th>
+            <th>Answers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the questions and their answers -->
+        <tr th:each="q : ${survey.questions}">
+            <td th:text="${q.questionText}"></td>
+            <td>
+                <!-- Display the answers based on the question type -->
+                <div th:switch="${q.getQuestionType()}">
+                    <div th:case="'MULTIPLE_CHOICE'">
+                        <!-- Display all selected options for multiple choice questions -->
+                        <ul>
+                            <li th:each="answer : ${q.getAnswers()}">
+                                <span th:text="${answer}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:case="'NUMERICAL_RANGE'">
+                        <!-- Display the numerical range for numerical range questions -->
+                        <span th:text="${q.getAnswers()}"></span>
+                    </div>
+                    <div th:case="'OPEN_ENDED'">
+                        <!-- Display the open-ended response for open-ended questions -->
+                        <span th:text="${q.getAnswers()}"></span>
+                    </div>
                 </div>
-                <div th:case="'NUMERICAL_RANGE'">
-                    <!-- Display the numerical range for numerical range questions -->
-                    <span th:text="${q.getAnswers()}"></span>
-                </div>
-                <div th:case="'OPEN_ENDED'">
-                    <!-- Display the open-ended response for open-ended questions -->
-                    <span th:text="${q.getAnswers()}"></span>
-                </div>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
 <a href="/">Back to Home</a>
 </body>
 </html>

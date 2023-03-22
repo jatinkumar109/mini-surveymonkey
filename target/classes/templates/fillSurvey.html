@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <meta charset="UTF-8">
   <title>Survey Questions</title>
 </head>
 <body>
-<h1>Survey Questions</h1>
-<form th:object="${survey}" th:action="@{/submitSurvey}" method="post">
+<div class="header">
+  <h1>Survey Questions</h1>
+  <h2 th:text="'Fill out the ' + ${survey.title} " />
+
+</div>
+<form th:object="${survey}" th:action="@{/submitSurvey}" method="post" class="my-5">
   <input type="hidden" th:name="surveyID" th:value="${survey.id}"/>
   <table>
     <thead>
@@ -43,9 +50,6 @@
     </tr>
     </tbody>
   </table>
-  <button type="submit">Submit Survey</button>
+  <button type="submit" class="btn btn-primary">Submit Survey</button>
 </form>
 <a href="/">Back to Home</a>
-
-</body>
-</html>
