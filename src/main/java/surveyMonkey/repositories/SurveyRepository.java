@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import surveyMonkey.models.Survey;
 
-
 /**
  * Interface class for survey.
  */
