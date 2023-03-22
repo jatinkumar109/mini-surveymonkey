@@ -47,7 +47,7 @@ public class SurveyRunner {
         OpenEndedQuestion q7_2 = new OpenEndedQuestion("Please list down all the medical conditions you have if any");
         NumericalRangeQuestion q8_2 = new NumericalRangeQuestion("How would you rate this survey", Integer.parseInt("1"), Integer.parseInt("10"));
         Survey fitnessSurvey = new Survey("Fitness Survey", new ArrayList<>(Arrays.asList(q1_2, q2_2, q3_2, q4_2, q5_2, q6_2, q7_2, q8_2)));
-        surveyRepository.save(fitnessSurvey);
+        //surveyRepository.save(fitnessSurvey);
 
         //Creating Online Learning Survey
         MultipleChoiceQuestion q1_3 = new MultipleChoiceQuestion("How do you feel overall about virtual/online education?", new ArrayList<String>(Arrays.asList("Poor", "Below Average", "Average", "Good", "Excellent")));
@@ -58,7 +58,7 @@ public class SurveyRunner {
         OpenEndedQuestion q6_3 = new OpenEndedQuestion(" How stressful was virtual/online learning for you during the COVID-19 pandemic?");
         OpenEndedQuestion q7_3 = new OpenEndedQuestion("What school did you attend?");
         Survey onlineLearningSurvey = new Survey("Online Learning Survey", new ArrayList<>(Arrays.asList(q1_3, q2_3, q3_3, q4_3, q5_3, q6_3, q7_3)));
-        surveyRepository.save(onlineLearningSurvey);
+        //surveyRepository.save(onlineLearningSurvey);
 
         //survey1.addQuestion(new MultipleChoiceQuestion("What is your favorite color?", List.of("Red", "Blue", "Green")));
         //survey1.addQuestion(new NumericalRangeQuestion("How many pets do you have?", 0, 10));
