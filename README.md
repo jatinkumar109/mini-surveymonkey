@@ -43,7 +43,11 @@ The current milestone has tests implemented for all types of questions MultipleC
 OpendEndedQuestionTest to test creating and answering different types of questions. 
 
 ## 📄 Current Project iteration
+
 ###### Milestone 2: MiniSurveyMokey Functional Web App with security and authentication, Database integration, and Testing
+
+**Implementation**
+
 The MiniSurvey web app has made significant strides towards becoming a reliable and secure survey application.
 In its current iteration, the web app has added Web Security using SecurityFilterChain, which authenticates 
 and authorizes incoming HTTP requests through login, ensuring that users are secure while navigating the web app.
@@ -61,6 +65,7 @@ of the web app's endpoints. This testing ensures the safe navigation and functio
 seamless experience for users.
 
 ## 📝 Roadmap for the Next Sprint
+
 The next sprint for the MiniSurvey web app aims to add more functionalities that enhance the user experience for both 
 surveyors and surveyees. One of the main objectives is to create separate access for surveyors and surveyees, enabling 
 them to perform different tasks based on their roles.
