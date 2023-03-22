@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <title>List of Surveys</title>
 </head>
 <body>
-
-<div class="header">
-<h1>List of Survey forms</h1>
-</div>
-
-<h1></h1>
-
+<h1>List of Surveys</h1>
 <ul>
   <li th:each="survey : ${surveys}">
-    <span class="banana-icon"></span><a th:href="@{/fillSurvey(surveyID=${survey.id})}" th:text="${survey.title}"></a>
-  </li>
-</ul>
-<div class="header">
-<h1>List of Survey Answers</h1>
-</div>
-<ul>
-  <li th:each="survey : ${surveys}" >
-    <span class="banana-icon"></span><a th:href="@{/displayResults(surveyID=${survey.id})}" th:text="${survey.title}"></a>
+    <a th:href="@{/fillSurvey(surveyID=${survey.id})}" th:text="${survey.title}"></a>
   </li>
 </ul>
 <a href="/">Back to Home</a>
-
 
 </body>
 
