@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <meta charset="UTF-8">
   <title>Create a New Survey</title>
 </head>
 <body>
+<div class="header">
 <h1>Create a New Survey</h1>
-
+</div>
 <form action="#" th:action="@{/createSurveySubmit}" th:object="${survey}" method="post">
+  <div class="form-row">
+    <div class="form-group col-md-6">
   <label for="title">Survey Title:</label>
+    </div>
+    <div class="form-group col-md-6">
   <input type="text" id="title" th:field="*{title}" th:required />
   <input type="hidden" th:name="surveyID" th:value="${survey.id}"/>
-
-  <hr>
-
-  <button type="submit">Create Survey</button>
+    </div>
+  </div>
+  </div>
+<button type="submit" class="btn btn-primary">Create Survey</button>
 </form>
+
 <a href="/">Back to Home</a>
 
 </body>
