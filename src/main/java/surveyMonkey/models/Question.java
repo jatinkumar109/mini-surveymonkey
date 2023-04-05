@@ -61,10 +61,19 @@ public abstract class Question {
         this.questionText = questionText;
     }
 
+    /**
+     * Setter for answer for a question
+     */
     public abstract boolean setAnswer(String object);
 
+    /**
+     * Getter for question type
+     */
     public abstract String getQuestionType();
 
+    /**
+     * Getter for answers
+     */
     public abstract List<String> getAnswers();
 
     //public int getAnsSize() {

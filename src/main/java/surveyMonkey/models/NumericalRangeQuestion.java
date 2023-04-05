@@ -56,10 +56,16 @@ public class NumericalRangeQuestion extends Question {
         return this.answers;
     }
 
+    /**
+     * Getter for question type
+     */
     public String getQuestionType() {
         return questionType.name();
     }
 
+    /**
+     * Setter for the nrq answer
+     */
     public boolean setAnswer(String answer) {
         if(Float.parseFloat(answer) <= this.max && Float.parseFloat(answer) >= min) {
             this.answers.add(answer);

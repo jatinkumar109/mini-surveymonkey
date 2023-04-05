@@ -102,10 +102,16 @@ public class Survey {
         this.questions.add(questionAdded);
     }
 
+    /**
+     * Check if a survey is open or not
+     */
     public boolean getIsOpen() {
         return this.isOpen;
     }
 
+    /**
+     * getter for question at a given index
+     */
     public Question getQuestion(int i) {
         return this.questions.get(i);
     }

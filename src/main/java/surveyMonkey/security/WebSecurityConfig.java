@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * This class handles the security login aspects of the project.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig  {

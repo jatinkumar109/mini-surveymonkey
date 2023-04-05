@@ -35,14 +35,23 @@ public class MultipleChoiceQuestion extends Question {
         this.options = options;
     }
 
+    /**
+     * Getter for answer options
+     */
     public List<String> getOptions() {
         return options;
     }
 
+    /**
+     * Setter for answer options
+     */
     public void setOptions(ArrayList<String> options) {
         this.options = options;
     }
 
+    /**
+     * Getter for question type
+     */
     public String getQuestionType() {
         return questionType.name();
     }
@@ -55,6 +64,11 @@ public class MultipleChoiceQuestion extends Question {
         return this.answers.add(option);
     }
 
+    /**
+     * Add answers to a list of options for MCQ
+     * @param options
+     * @return
+     */
     public boolean addAnswers(List<String> options) {
         return this.answers.addAll(options);
     }
