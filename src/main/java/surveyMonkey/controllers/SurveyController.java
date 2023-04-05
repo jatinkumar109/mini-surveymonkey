@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import surveyMonkey.models.*;
 import surveyMonkey.repositories.SurveyRepository;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * This class handles and controls the survey operations.
@@ -43,6 +45,22 @@ public class SurveyController {
 
         // process the form data
         return "surveyCreated";
+    }
+
+    @GetMapping("/closeSurvey")
+    public  String closeSurvey(Model model, @RequestParam("surveyID")Long surveyID){
+        Survey survey = repository.findById(surveyID).get();
+        survey.setClose();
+        repository.save(survey);
+        return "surveyClosed";
+    }
+
+    @GetMapping("/openSurvey")
+    public String openSurvey(Model model, @RequestParam("surveyID") Long surveyID){
+        Survey survey = repository.findById(surveyID).get();
+        survey.setOpen();
+        repository.save(survey);
+        return "surveyOpened";
     }
 
     @PostMapping("/addQuestions")
@@ -95,6 +113,8 @@ public class SurveyController {
         return "questionAdded";
     }
 
+
+
     @PostMapping("/addOpenEndedQuestion")
     public String addOpenEndedQuestion(Model model,
                                        @ModelAttribute OpenEndedQuestion oeQ,
@@ -145,22 +165,29 @@ public class SurveyController {
     @GetMapping("/listSurveys")
     public String getSurveys(Model model) {
         Iterable<Survey> surveys = repository.findAll();
-        model.addAttribute("surveys", surveys);
+        List<Survey> filteredSurveys = new ArrayList<>();
+
+        for (Survey survey : surveys) {
+            if (survey.getIsOpen() == true) {
+                filteredSurveys.add(survey);
+            }
+        }
+
+        model.addAttribute("surveys", filteredSurveys);
         return "listSurveys";
     }
 
     @GetMapping("/listClosedSurveys")
     public String getClosedSurveys(Model model) {
         Iterable<Survey> surveys = repository.findAll();
-        Iterator<Survey> closedSurveys = surveys.iterator();
-        while (closedSurveys.hasNext()) {
-            Survey survey = closedSurveys.next();
-            if (survey.getIsOpen() == true) {
-                closedSurveys.remove();
-            }
+        List<Survey> filteredSurveys = new ArrayList<>();
 
+        for (Survey survey : surveys) {
+            if (survey.getIsOpen() == false) {
+                filteredSurveys.add(survey);
+            }
         }
-        model.addAttribute("closedSurveys", closedSurveys);
+        model.addAttribute("closedSurveys", filteredSurveys);
         return "listClosedSurveys";
     }
     @GetMapping("/displayResults")
