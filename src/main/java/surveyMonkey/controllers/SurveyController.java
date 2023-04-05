@@ -190,10 +190,20 @@ public class SurveyController {
         model.addAttribute("closedSurveys", filteredSurveys);
         return "listClosedSurveys";
     }
+
     @GetMapping("/displayResults")
     public String displayResults(@RequestParam("surveyID") Long surveyID, Model model) {
         Survey survey = repository.findById(surveyID).get();
         model.addAttribute("survey", survey);
         return "displayResults";
+    }
+
+    @PostMapping("/chartsDisplay")
+    public String chartsDisplay(Model model, HttpServletRequest request) {
+        Long surveyId = Long.parseLong(request.getParameter("surveyID"));
+        Survey survey = repository.findById(surveyId).get();
+        model.addAttribute("survey", survey);
+
+        return "/chartsDisplay";
     }
 }

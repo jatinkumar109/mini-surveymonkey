@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Include the Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+
+  <meta charset="UTF-8">
+  <title>Survey Results</title>
+</head>
+<body>
+<div class="header">
+
+  <h1>Survey Results</h1>
+  <h2 th:text="${survey.title} " />
+
+</div>
+<form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the questions and their answers -->
+    <tr th:each="q : ${survey.questions}">
+      <td th:text="${q.questionText}"></td>
+      <td>
+        <!-- Display the answers based on the question type -->
+        <div th:switch="${q.getQuestionType()}">
+          <div th:case="'MULTIPLE_CHOICE'">
+            <!-- Display all selected options for multiple choice questions -->
+            <ul>
+              <li th:each="answer : ${q.getAnswers()}">
+                <span th:text="${answer}"></span>
+              </li>
+            </ul>
+          </div>
+          <div th:case="'NUMERICAL_RANGE'">
+            <!-- Display the numerical range for numerical range questions -->
+            <canvas id="bar" width="400" height="400"></canvas>
+            <script>
+                            // Get the answers for this question
+                            var answers = [[${q.getAnswers()}]];
+
+                            // Create the histogram using Chart.js
+                            var ctx = document.getElementById('histogram').getContext('2d');
+                            var histogram = new Chart(ctx, {
+                                type: 'histogram',
+                                data: {
+                                    datasets: [{
+                                        label: 'Answers',
+                                        data: answers,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                            type: 'linear',
+                                            position: 'bottom',
+                                            ticks: {
+                                                min: [[${q.getMin()}]],
+                                                max: [[${q.getMax()}]],
+                                                stepSize: 1
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+          </div>
+          <div th:case="'OPEN_ENDED'">
+            <!-- Display the open-ended response for open-ended questions -->
+            <span th:text="${q.getAnswers()}"></span>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+<a href="/">Back to Home</a>
+</body>
+</html>
