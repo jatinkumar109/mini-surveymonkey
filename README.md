@@ -79,4 +79,4 @@ and submitting responses.
 
 ## 📝 Known Issues
 
-The histogram functionality is not fully functional, we spent time debugging it but could not get it working.
+The histogram functionality is not fully functional though we spent time debugging but we could not get it working.
