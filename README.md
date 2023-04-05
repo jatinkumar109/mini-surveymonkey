@@ -42,8 +42,6 @@ for both these classes is yet to be developed.
 The current milestone has tests implemented for all types of questions MultipleChoiceTest, NumericalRangeQuestionTest, and
 OpendEndedQuestionTest to test creating and answering different types of questions. 
 
-## 📄 Current Project iteration
-
 ###### Milestone 2: MiniSurveyMonkey Functional Web App with security and authentication, Database integration, and Testing
 
 **Implementation**
@@ -64,9 +62,13 @@ In addition to these features, the current prototype also includes webApplicatio
 of the web app's endpoints. This testing ensures the safe navigation and functionality of the web app, providing a
 seamless experience for users.
 
-## 📝 Roadmap for the Next Sprint
+## 📄 Current Project iteration
 
-The next sprint for the MiniSurvey web app aims to add more functionalities that enhance the user experience for both 
+###### Milestone 3 : MiniSurveyMonkey Functional Web App with better css, more functionalities, and Testing
+
+**Implementation**
+
+This sprint for the MiniSurvey web app aimed to add more functionalities that enhance the user experience for both 
 surveyors and surveyees. One of the main objectives is to create separate access for surveyors and surveyees, enabling 
 them to perform different tasks based on their roles.
 
@@ -74,3 +76,7 @@ Surveyors will have the ability to view the saved results of their surveys. This
 the data collected and gain insights into the opinions and preferences of their target audience. Additionally, 
 surveyees will have a smoother experience, with new features that streamline the process of filling out surveys 
 and submitting responses.
+
+## 📝 Known Issues
+
+The histogram functionality is not fully functional though we spent time debugging but we could not get it working.
