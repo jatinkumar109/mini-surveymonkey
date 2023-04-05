@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import surveyMonkey.models.*;
 import surveyMonkey.repositories.SurveyRepository;
 
+import java.util.Iterator;
+
 /**
  * This class handles and controls the survey operations.
  */
@@ -147,6 +149,20 @@ public class SurveyController {
         return "listSurveys";
     }
 
+    @GetMapping("/listClosedSurveys")
+    public String getClosedSurveys(Model model) {
+        Iterable<Survey> surveys = repository.findAll();
+        Iterator<Survey> closedSurveys = surveys.iterator();
+        while (closedSurveys.hasNext()) {
+            Survey survey = closedSurveys.next();
+            if (survey.getIsOpen() == true) {
+                closedSurveys.remove();
+            }
+
+        }
+        model.addAttribute("closedSurveys", closedSurveys);
+        return "listClosedSurveys";
+    }
     @GetMapping("/displayResults")
     public String displayResults(@RequestParam("surveyID") Long surveyID, Model model) {
         Survey survey = repository.findById(surveyID).get();
