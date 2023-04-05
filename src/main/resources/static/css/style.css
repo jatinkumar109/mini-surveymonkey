@@ -68,6 +68,9 @@ button {
     margin-top: 50px;
     margin-bottom: 20px;
 }
+.transparent-link {
+    background-color: transparent;
+}
 .header {
   background-color: #1AAF6F;
   padding: 60px;

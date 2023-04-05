@@ -81,11 +81,15 @@ public class Survey {
     }
 
     /**
-     * This method closes/exits the survey.
+     * This method closes the survey.
      */
     public void setClose() {
         this.isOpen = false;
     }
+    /**
+     * This method opens the survey.
+     */
+    public void setOpen(){this.isOpen = true;}
 
     public void setOpen(boolean open) {
         this.isOpen = open;

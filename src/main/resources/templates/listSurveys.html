@@ -17,6 +17,7 @@
 <ul>
   <li th:each="survey : ${surveys}">
     <span class="banana-icon"></span><a th:href="@{/fillSurvey(surveyID=${survey.id})}" th:text="${survey.title}"></a>
+    <a th:href="@{/closeSurvey(surveyID=${survey.id})}" style="background-color: transparent;">close survey</a>
   </li>
 </ul>
 <div class="header">
@@ -25,6 +26,7 @@
 <ul>
   <li th:each="survey : ${surveys}" >
     <span class="banana-icon"></span><a th:href="@{/displayResults(surveyID=${survey.id})}" th:text="${survey.title}"></a>
+
   </li>
 </ul>
 <a href="/">Back to Home</a>

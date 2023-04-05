@@ -8,12 +8,22 @@
 </head>
 <body>
 <div class="header">
-  <h1>List of Closed Surveys</h1>
+  <h1>Closed Surveys</h1>
 </div>
 <h1></h1>
 <ul>
   <li th:each="survey : ${closedSurveys}">
     <span class="banana-icon"></span><a th:href="@{/fillSurvey(surveyID=${survey.id})}" th:text="${survey.title}"></a>
+    <a th:href="@{/openSurvey(surveyID=${survey.id})}"style="background-color: transparent;">open survey</a>
+  </li>
+</ul>
+<div class="header">
+  <h1>Closed Survey Answers</h1>
+</div>
+<ul>
+  <li th:each="survey : ${closedSurveys}" >
+    <span class="banana-icon"></span><a th:href="@{/displayResults(surveyID=${survey.id})}" th:text="${survey.title}"></a>
+
   </li>
 </ul>
 <a href="/">Back to Home</a>
