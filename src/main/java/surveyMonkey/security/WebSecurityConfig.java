@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.web.servlet.function.RequestPredicates.headers;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig  {
@@ -31,7 +33,14 @@ public class WebSecurityConfig  {
 
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+
+                .logout((logout) -> logout.permitAll())
+                .headers()
+                    .contentSecurityPolicy("script-src 'self' https://cdn.jsdelivr.net/npm/chart.js%22")
+                    .and()
+                    .frameOptions().sameOrigin()
+                    .and();
+                    //.xssProtection().block(false);
 
 
         return http.build();
