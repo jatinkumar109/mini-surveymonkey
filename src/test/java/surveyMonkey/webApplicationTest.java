@@ -160,4 +160,13 @@ public class webApplicationTest {
                 .andExpect(model().attributeExists("questions"))
                 .andExpect(model().attributeExists("surveyID"));
     }
+
+    @Test
+    @WithMockUser(username = "user", roles = {"USER"})
+    @Transactional
+    public void testViewClosedSurveys() throws Exception{
+        String login = this.mockMvc.perform(formLogin()).andReturn().getResponse().getContentAsString();
+        String Result = this.mockMvc.perform(get("http://localhost:8080/listClosedSurveys").with(csrf())).andReturn().getResponse().getContentAsString();
+        assert Result.contains("List of Closed Surveys");
+    }
 }

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <meta charset="UTF-8">
-  <title>Surveys</title>
+  <meta charset="UTF-8" />
 </head>
 <body>
-<h1>List of Surveys</h1>
+<div class="header">
+  <h1>List of Closed Surveys</h1>
+</div>
+<h1></h1>
 <ul>
-  <li th:each="survey : ${surveys}">
-    <a th:href="@{/surveys/{id}(id=${survey.id})}" th:text="${survey.title}"></a>
+  <li th:each="survey : ${closedSurveys}">
+    <span class="banana-icon"></span><a th:href="@{/fillSurvey(surveyID=${survey.id})}" th:text="${survey.title}"></a>
   </li>
 </ul>
+<a href="/">Back to Home</a>
 </body>
 </html>

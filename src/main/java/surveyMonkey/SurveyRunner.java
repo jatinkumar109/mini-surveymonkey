@@ -58,6 +58,7 @@ public class SurveyRunner {
         OpenEndedQuestion q6_3 = new OpenEndedQuestion(" How stressful was virtual/online learning for you during the COVID-19 pandemic?");
         OpenEndedQuestion q7_3 = new OpenEndedQuestion("What school did you attend?");
         Survey onlineLearningSurvey = new Survey("Online Learning Survey", new ArrayList<>(Arrays.asList(q1_3, q2_3, q3_3, q4_3, q5_3, q6_3, q7_3)));
+//        onlineLearningSurvey.setClose();
         //surveyRepository.save(onlineLearningSurvey);
 
         //survey1.addQuestion(new MultipleChoiceQuestion("What is your favorite color?", List.of("Red", "Blue", "Green")));
