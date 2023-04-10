@@ -79,7 +79,7 @@ and submitting responses.
 
 ## 📝 Known issues;
 
-CI seems to be broken after one of the Pull Request. We debugged but could not fix the error within the deadline. 
+CI seems to be broken after one of the last PRs. We debugged but could not fix the error within the deadline. 
 
 ## 📝 Roadmap for the enhancements that could be done;
 
