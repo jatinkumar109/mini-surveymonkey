@@ -1,15 +1,32 @@
 package surveyMonkey.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import surveyMonkey.models.*;
 import surveyMonkey.repositories.SurveyRepository;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,6 +50,117 @@ public class SurveyController {
         return "createSurvey";
     }
 
+//    @GetMapping("/getRandomHistograms")
+//    public String RandomHistogram(Model model) throws IOException {
+//        // Create dataset
+//        double[] data = { 1.2, 2.3, 3.4, 1.5, 2.6, 3.7, 1.8, 2.9, 3.0 };
+//        HistogramDataset dataset = new HistogramDataset();
+//        dataset.addSeries("data", data, 10);
+//        // Create chart
+//        JFreeChart chart = ChartFactory.createHistogram(
+//                "Histogram", "Value", "Frequency", dataset, PlotOrientation.VERTICAL, true, true, false);
+//        chart.setBackgroundPaint(Color.white);
+//        // Save chart as image file
+//        int width = 800; /* Width of the image */
+//        int height = 600; /* Height of the image */
+//        BufferedImage chartImage = chart.createBufferedImage(width, height);
+//        File outputFile = new File("C:/Users/peter/Desktop/winter2023/project/src/main/resources/static/histogram.png");
+//        ImageIO.write(chartImage, "png", outputFile);
+////        model.addAttribute()
+//        return "histogramTrial";
+//    }
+    @GetMapping("/getRandomHistograms")
+    public String RandomBarChart() throws IOException {
+        // Create dataset
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1.0, "data", "Category 1");
+        dataset.addValue(2.0, "data", "Category 2");
+        dataset.addValue(3.0, "data", "Category 3");
+        dataset.addValue(4.0, "data", "Category 4");
+        dataset.addValue(5.0, "data", "Category 69");
+
+        // Create chart
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Bar Chart", "Category", "Value", dataset, PlotOrientation.VERTICAL, true, true, false);
+
+        // Customize chart
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.white);
+        plot.setRangeGridlinePaint(Color.black);
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Color.lightGray);
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setBarPainter(new StandardBarPainter());
+        renderer.setSeriesPaint(0, Color.blue);
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        // Save chart as image file
+        int width = 800; /* Width of the image */
+        int height = 600; /* Height of the image */
+        BufferedImage chartImage = chart.createBufferedImage(width, height);
+        File outputFile = new File("C:/Users/peter/Desktop/winter2023/project/src/main/resources/static/histogram.png");
+        ImageIO.write(chartImage, "png", outputFile);
+
+        return "histogramTrial";
+    }
+
+    @GetMapping("/getActualHistograms")
+    public String ActualChart(@RequestParam("surveyID") Long surveyID, @RequestParam("questionID") Integer questionID, @RequestParam("questiontext") String questiontext ,Model model) throws IOException {
+        Survey survey = repository.findById(surveyID).get();
+        if (survey.getQuestionByText(questiontext) instanceof MultipleChoiceQuestion) {
+            MultipleChoiceQuestion qg = (MultipleChoiceQuestion) survey.getQuestionByText(questiontext); //survey.getQuestion(questionID - 1);
+            DefaultPieDataset pieDataset = new DefaultPieDataset();
+            for (String option : qg.getAnswers()) {
+                if (pieDataset.getKeys().contains(option)) {
+                    double value = pieDataset.getValue(option).doubleValue();
+                    pieDataset.setValue(option, 1 + value);
+                } else {
+                    pieDataset.setValue(option, 1);
+                }
+            }
+            JFreeChart pieChart = ChartFactory.createPieChart(
+                    survey.getTitle() + " : " + qg.getQuestionText(),
+                    pieDataset,
+                    true,
+                    true,
+                    false);
+            BufferedImage pieBufferedImage = pieChart.createBufferedImage(500, 300);
+            ByteArrayOutputStream pieBaos = new ByteArrayOutputStream();
+            ImageIO.write(pieBufferedImage, "png", pieBaos);
+            byte[] pieBytes = pieBaos.toByteArray();
+            String pieEncodedString = java.util.Base64.getEncoder().encodeToString(pieBytes);
+            model.addAttribute("chartImage", pieEncodedString);
+        } else {
+            NumericalRangeQuestion ng = (NumericalRangeQuestion) survey.getQuestionByText(questiontext);
+            DefaultCategoryDataset barDataset = new DefaultCategoryDataset();
+            for (String option : ng.getAnswers()) {
+                int columnIndex = barDataset.getColumnIndex(option);
+                if (columnIndex == -1) {
+                    barDataset.addValue(1, "Series 1", option);
+                } else {
+                    double value = barDataset.getValue(0, columnIndex).doubleValue();
+                    barDataset.addValue(1 + value, "Series 1", option);
+                }
+            }
+            JFreeChart barChart = ChartFactory.createBarChart(
+                    survey.getTitle() + " : " + ng.getQuestionText(),
+                    "Options",
+                    "Number of Responses",
+                    barDataset);
+            BufferedImage barBufferedImage = barChart.createBufferedImage(500, 300);
+            ByteArrayOutputStream barBaos = new ByteArrayOutputStream();
+            ImageIO.write(barBufferedImage, "png", barBaos);
+            byte[] barBytes = barBaos.toByteArray();
+            String barEncodedString = java.util.Base64.getEncoder().encodeToString(barBytes);
+            model.addAttribute("chartImage", barEncodedString);
+        }
+        return "histogramTrial";
+    }
+    public static void saveChartAsPNG(JFreeChart chart, int width, int height, String fileName) throws IOException {
+        File file = new File(fileName);
+        BufferedImage chartImage = chart.createBufferedImage(width, height);
+        ImageIO.write(chartImage, "png", file);
+    }
     @PostMapping("/createSurveySubmit")
     public String createSurveySubmit(Model model,
                                      @ModelAttribute Survey survey
