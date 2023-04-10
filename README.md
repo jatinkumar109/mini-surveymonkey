@@ -77,6 +77,14 @@ the data collected and gain insights into the opinions and preferences of their 
 surveyees will have a smoother experience, with new features that streamline the process of filling out surveys 
 and submitting responses.
 
-## 📝 Known Issues
+## 📝 Known issues;
 
-The histogram functionality is not fully functional though we spent time debugging but we could not get it working.
+CI seems to be broken after one of the Pull Request. We debugged but could not fix the error within the deadline. 
+
+## 📝 Roadmap for the enhancements that could be done;
+
+1. Implement Error Handling 
+2. Separate Functionality for User and Admin accounts
+
+
+
