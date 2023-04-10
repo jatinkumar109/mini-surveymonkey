@@ -31,6 +31,8 @@
                 <!-- Display the answers based on the question type -->
                 <div th:switch="${q.getQuestionType()}">
                     <div th:case="'MULTIPLE_CHOICE'">
+<!--                        <a th:href="@{/closeSurvey(surveyID=${survey.id})}" style="background-color: transparent;">generate graph</a>-->
+                        <a th:href="@{/getActualHistograms(surveyID=${survey.id}, questionID = ${q.id} , questiontext = ${q.getQuestionText()})}" style="background-color: transparent;">generate graph</a>
                         <!-- Display all selected options for multiple choice questions -->
                         <ul>
                             <li th:each="answer : ${q.getAnswers()}">
@@ -39,6 +41,8 @@
                         </ul>
                     </div>
                     <div th:case="'NUMERICAL_RANGE'">
+                        <a th:href="@{/getActualHistograms(surveyID=${survey.id}, questionID = ${q.id} , questiontext = ${q.getQuestionText()})}" style="background-color: transparent;">generate graph</a>
+
                         <!-- Display the numerical range for numerical range questions -->
                         <span th:text="${q.getAnswers()}"></span>
                     </div>

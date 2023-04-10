@@ -109,5 +109,14 @@ public class Survey {
     public Question getQuestion(int i) {
         return this.questions.get(i);
     }
+
+    public Question getQuestionByText(String question){
+        for (Question q : this.questions){
+            if (q.getQuestionText().equals(question)){
+                return q;
+            }
+        }
+        return this.getQuestion(0);
+    }
 }
 

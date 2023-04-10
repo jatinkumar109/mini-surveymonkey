@@ -1,19 +1,7 @@
 package surveyMonkey;
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,12 +11,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import surveyMonkey.models.*;
+import surveyMonkey.models.MultipleChoiceQuestion;
+import surveyMonkey.models.NumericalRangeQuestion;
+import surveyMonkey.models.OpenEndedQuestion;
+import surveyMonkey.models.Survey;
 import surveyMonkey.repositories.SurveyRepository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -159,6 +155,21 @@ public class webApplicationTest {
                 .andExpect(model().attributeExists("title"))
                 .andExpect(model().attributeExists("questions"))
                 .andExpect(model().attributeExists("surveyID"));
+    }
+
+    @Test
+    @WithMockUser(username = "user", roles = {"USER"})
+    @Transactional
+    public void testHistogram() throws Exception {
+        OpenEndedQuestion oeq = new OpenEndedQuestion("test Open Ended");
+
+        mockMvc.perform(get("/getActualHistograms")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("surveyID", "1" )
+                        .param("questionID" , "1" )
+                        .param("questiontext" ,"How often do you exercise?" )
+                        .flashAttr("oeQ", oeq)
+                        .with(csrf())).andExpect(status().isOk());
     }
 
     @Test
